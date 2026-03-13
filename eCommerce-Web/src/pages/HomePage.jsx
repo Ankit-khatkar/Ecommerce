@@ -2,39 +2,46 @@ import "./HomePage.css";
 import { Header } from "../components/Header";
 import { products } from "../starting-code/data/products.js";
 export function HomePage() {
+  fetch("http://localhost:3000/api/products")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
   return (
     <>
       <title>E Commerce</title>
       <Header />
-      <div class="home-page">
-        <div class="products-grid">
+      <div className="home-page">
+        <div className="products-grid">
           {products.map((product) => {
             return (
               <>
-                <div key={product.id} class="product-container">
-                  <div class="product-image-container">
-                    <img class="product-image" src={product.image} />
+                <div key={product.id} className="product-container">
+                  <div className="product-image-container">
+                    <img className="product-image" src={product.image} />
                   </div>
 
-                  <div class="product-name limit-text-to-2-lines">
+                  <div className="product-name limit-text-to-2-lines">
                     {product.name}
                   </div>
 
-                  <div class="product-rating-container">
+                  <div className="product-rating-container">
                     <img
-                      class="product-rating-stars"
+                      className="product-rating-stars"
                       src={`images/ratings/rating-${product.rating.stars * 10}.png`}
                     />
-                    <div class="product-rating-count link-primary">
+                    <div className="product-rating-count link-primary">
                       {product.rating.count}
                     </div>
                   </div>
 
-                  <div class="product-price">
+                  <div className="product-price">
                     ${(product.priceCents / 100).toFixed(2)}
                   </div>
 
-                  <div class="product-quantity-container">
+                  <div className="product-quantity-container">
                     <select>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -49,14 +56,14 @@ export function HomePage() {
                     </select>
                   </div>
 
-                  <div class="product-spacer"></div>
+                  <div className="product-spacer"></div>
 
-                  <div class="added-to-cart">
+                  <div className="added-to-cart">
                     <img src="images/icons/checkmark.png" />
                     Added
                   </div>
 
-                  <button class="add-to-cart-button button-primary">
+                  <button className="add-to-cart-button button-primary">
                     Add to Cart
                   </button>
                 </div>
