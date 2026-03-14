@@ -12,7 +12,7 @@ function App() {
     axios.get("/api/cart-items?expand=product").then((response) => {
       setCart(response.data);
     });
-  });
+  }, []);
   return (
     <>
       <Routes>
