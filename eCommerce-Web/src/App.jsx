@@ -1,4 +1,4 @@
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/home/HomePage.jsx";
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
