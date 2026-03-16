@@ -3,6 +3,15 @@ import { formatMoney } from "../../utils/money";
 import { useState } from "react";
 export function Product({ product, loadCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [opacity, setOpacity] = useState(false);
+
+  const addPopUp = () => {
+    setOpacity(true);
+    setTimeout(() => {
+      setOpacity(false);
+    }, 2000);
+  };
+
   const addToCart = async () => {
     await axios.post("./api/cart-items", {
       productId: product.id,
@@ -52,14 +61,17 @@ export function Product({ product, loadCart }) {
 
         <div className="product-spacer"></div>
 
-        <div className="added-to-cart">
+        <div className="added-to-cart" style={{ opacity: opacity ? 1 : 0 }}>
           <img src="images/icons/checkmark.png" />
           Added
         </div>
 
         <button
           className="add-to-cart-button button-primary"
-          onClick={addToCart}
+          onClick={() => {
+            addToCart();
+            addPopUp();
+          }}
         >
           Add to Cart
         </button>

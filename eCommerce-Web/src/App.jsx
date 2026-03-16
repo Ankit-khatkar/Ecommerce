@@ -7,6 +7,7 @@ import { CheckoutPage } from "./pages/checkout/CheckoutPage.jsx";
 import { OrdersPage } from "./pages/orders/OrdersPage.jsx";
 import { TrackingPage } from "./pages/tracking/TrackingPage.jsx";
 function App() {
+  window.axios = axios;
   const [cart, setCart] = useState([]);
   const loadCart = async () => {
     const response = await axios.get("/api/cart-items?expand=product");
