@@ -2,9 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 export function ProductQuantity({ loadCart, cartItem }) {
   const [isEditing, setIsEditing] = useState(false);
-  function updateQuantity() {
+  const [quantity, setQuantity] = useState(cartItem.quantity ?? 1);
+  function isUpdating() {
     setIsEditing(true);
   }
+  function updateQuantity(event) {
+    setQuantity(event.target.value);
+  }
+
   const deleteCartItem = async () => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
     await loadCart();
@@ -14,14 +19,21 @@ export function ProductQuantity({ loadCart, cartItem }) {
       <div className="product-quantity">
         <span>
           Quantity:
-          {isEditing && <input type="text" style={{ width: "50px" }} />}
+          {isEditing && (
+            <input
+              type="text"
+              style={{ width: "50px" }}
+              value={quantity}
+              onChange={updateQuantity}
+            />
+          )}
           {!isEditing && (
             <span className="quantity-label">{cartItem.quantity}</span>
           )}
         </span>
         <span
           className="update-quantity-link link-primary"
-          onClick={updateQuantity}
+          onClick={isUpdating}
         >
           Update
         </span>

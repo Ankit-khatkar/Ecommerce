@@ -29,7 +29,11 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
                   <div className="product-price">
                     {formatMoney(cartItem.product.priceCents)}
                   </div>
-                  <ProductQuantity loadCart={loadCart} cartItem={cartItem} />
+                  <ProductQuantity
+                    key={cartItem.productId}
+                    loadCart={loadCart}
+                    cartItem={cartItem}
+                  />
                 </div>
                 <DeliveryOptions
                   cartItem={cartItem}
